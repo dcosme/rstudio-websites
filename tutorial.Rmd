@@ -135,12 +135,12 @@ Let's add a table, just for kicks.
 | 7 | 10 |
 
 ## add r code chunk
-```{r}
+```{r, eval=FALSE}
 mean(iris$Sepal.Length)
 ```
 
 ## plot something
-```{r}
+```{r, eval=FALSE}
 require(ggplot2)
 ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
   geom_point() +

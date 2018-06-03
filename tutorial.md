@@ -4,11 +4,11 @@ Dani Cosme & Sam Chavez
 6/2/2018
 
 -   [Create a website in RStudio](#create-a-website-in-rstudio)
-    -   [1. Background info](#background-info)
+    -   [Background info](#background-info)
     -   [Why use RStudio to make static websites?](#why-use-rstudio-to-make-static-websites)
     -   [What is blogdown?](#what-is-blogdown)
     -   [What is Hugo?](#what-is-hugo)
--   [2. Learn the basics](#learn-the-basics)
+-   [Learn the basics](#learn-the-basics)
     -   [install blogdown and hugo](#install-blogdown-and-hugo)
     -   [update hugo if necessary](#update-hugo-if-necessary)
     -   [create a website using the default lithium template](#create-a-website-using-the-default-lithium-template)
@@ -30,8 +30,8 @@ Create a website in RStudio
 
 Overview of the tutorial 1. Background into 2. Learn the basics 3. Create an academic website 4. Publish your website to GitHub 5. Explore advanced features
 
-1. Background info
-------------------
+Background info
+---------------
 
 Why use RStudio to make static websites?
 ----------------------------------------
@@ -42,8 +42,8 @@ What is blogdown?
 What is Hugo?
 -------------
 
-2. Learn the basics
-===================
+Learn the basics
+================
 
 install blogdown and hugo
 -------------------------
@@ -155,25 +155,16 @@ add r code chunk
 mean(iris$Sepal.Length)
 ```
 
-    ## [1] 5.843333
-
 plot something
 --------------
 
 ``` r
 require(ggplot2)
-```
-
-    ## Loading required package: ggplot2
-
-``` r
 ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
   geom_point() +
   geom_smooth(method = "lm") + 
   scale_color_manual(values = c("#3B9AB2", "#E4B80E", "#F21A00"))
 ```
-
-![](tutorial_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-2-1.png)
 
 #### Rmarkdown post
 
