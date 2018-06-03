@@ -19,10 +19,8 @@ Dani Cosme & Sam Chavez
     -   [posts](#posts)
         -   [Create a new post](#create-a-new-post)
             -   [Markdown post](#markdown-post)
-    -   [add r code chunk](#add-r-code-chunk)
-    -   [plot something](#plot-something)
-        -   [Rmarkdown post](#rmarkdown-post)
-    -   [create academic website using the `hugo-academic` template by gcushed](#create-academic-website-using-the-hugo-academic-template-by-gcushed)
+            -   [Rmarkdown post](#rmarkdown-post)
+    -   [create academic website using the `hugo-academic` template](#create-academic-website-using-the-hugo-academic-template)
 -   [render the site](#render-the-site-1)
 
 Create a website in RStudio
@@ -133,30 +131,26 @@ The `new_post()` function will automatically create a new post and append the da
 
     blogdown::new_post("newmd", ext = '.md')
 
-Add the following text to the new `.md` file and view it in the browser:
+Add the following text to the new `.md` file:
 
-Here is some text. Lots of text. So much text.
+    Here is some text. Lots of text. So much text.
 
-**Gee this is fun!**
+    **Gee this is fun!**
 
-Let's add a table, just for kicks.
+    Let's add a table, just for kicks.
 
-| hours of sun | happiness |
-|--------------|-----------|
-| 0            | 1         |
-| 3            | 4         |
-| 5            | 7         |
-| 7            | 10        |
+    | hours of sun | happiness |
+    |--------------|-----------|
+    | 0 | 1 |
+    | 3 | 4 |
+    | 5 | 7 |
+    | 7 | 10 |
 
-add r code chunk
-----------------
+Add the following r code chunks and view in the browser:
 
 ``` r
 mean(iris$Sepal.Length)
 ```
-
-plot something
---------------
 
 ``` r
 require(ggplot2)
@@ -172,8 +166,8 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
 
 Add the same text as above to your `.Rmd` file and view it in the browser.
 
-create academic website using the `hugo-academic` template by gcushed
----------------------------------------------------------------------
+create academic website using the `hugo-academic` template
+----------------------------------------------------------
 
     gcushen/hugo-academic
 

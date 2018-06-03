@@ -119,8 +119,8 @@ The `new_post()` function will automatically create a new post and append the da
 blogdown::new_post("newmd", ext = '.md')
 ```
 
-Add the following text to the new `.md` file and view it in the browser:
-
+Add the following text to the new `.md` file:
+```
 Here is some text. Lots of text. So much text.
 
 **Gee this is fun!**
@@ -133,13 +133,13 @@ Let's add a table, just for kicks.
 | 3 | 4 |
 | 5 | 7 |
 | 7 | 10 |
+```
 
-## add r code chunk
+Add the following r code chunks and view in the browser:
 ```{r, eval=FALSE}
 mean(iris$Sepal.Length)
 ```
 
-## plot something
 ```{r, eval=FALSE}
 require(ggplot2)
 ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
@@ -154,7 +154,7 @@ blogdown::new_post("newrmd", ext = '.Rmd')
 ```
 Add the same text as above to your `.Rmd` file and view it in the browser.
 
-## create academic website using the `hugo-academic` template by gcushed
+## create academic website using the `hugo-academic` template
 ```
 gcushen/hugo-academic
 ```
