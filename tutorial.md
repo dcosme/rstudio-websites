@@ -16,9 +16,9 @@ Dani Cosme & Sam Chavez
     -   [where does the content live?](#where-does-the-content-live)
     -   [config.toml file](#config.toml-file)
     -   [about page](#about-page)
-    -   [h2 header](#h2-header)
-        -   [h3 header](#h3-header)
-            -   [h4 header](#h4-header)
+    -   [posts](#posts)
+        -   [Create a new post](#create-a-new-post)
+            -   [Markdown post](#markdown-post)
     -   [add r code chunk](#add-r-code-chunk)
     -   [plot something](#plot-something)
         -   [Rmarkdown post](#rmarkdown-post)
@@ -94,39 +94,44 @@ about page
 ----------
 
 1.  Open `content/about/md` and check it out.
-2.  Add the following text to the file and look at the difference. \`\`\` We're writing in markdown here. Some useful syntax.
+2.  Add the following text to the file and look at the difference.
 
-h2 header
----------
+<!-- -->
 
-### h3 header
+    We're writing in markdown here. Some useful syntax.
 
-#### h4 header
+    ## h2 header
+    ### h3 header
+    #### h4 header
 
-**bold**<br> *italics*<br> ~~strikethrough~~
+    **bold**<br>
+    *italics*<br>
+    ~~strikethrough~~
 
-Check out [Cory's awesome markdown tutorial](https://github.com/uodatascience/markdown) for more markdown magic.
+    Check out [Cory's awesome markdown tutorial](https://github.com/uodatascience/markdown) for more markdown magic.
 
-Also not that you can write in html as well.
+    Also not that you can write in html as well.
 
-<img src="https://media.giphy.com/media/l0Nwvo3slpo6nS0PC/giphy.gif" alt="neato">
+    <img src="https://media.giphy.com/media/l0Nwvo3slpo6nS0PC/giphy.gif" alt="neato">
 
+posts
+-----
 
-    ## posts
+1.  Open `content/post` and look around
 
-    1. Open `content/post` and look around
+Add the following text to your `config.toml` page:
 
-    Add the following text to your `config.toml` page:
+    [[menu.main]]
+        name = "Posts"
+        url = "/post/"
 
-\[\[menu.main\]\] name = "Posts" url = "/post/"
+### Create a new post
 
+The `new_post()` function will automatically create a new post and append the date to the front of the file name that you specify as an input.
 
-    ### Create a new post
-    The `new_post()` function will automatically create a new post and append the date to the front of the file name that you specify as an input.
+#### Markdown post
 
-    #### Markdown post
-
-blogdown::new\_post("newmd", ext = '.md') \`\`\`
+    blogdown::new_post("newmd", ext = '.md')
 
 Add the following text to the new `.md` file and view it in the browser:
 

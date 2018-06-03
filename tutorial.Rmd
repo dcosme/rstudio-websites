@@ -80,6 +80,7 @@ Add the following text to your `config.toml` page:
 
 1. Open `content/about/md` and check it out.
 2. Add the following text to the file and look at the difference.
+
 ```
 We're writing in markdown here. Some useful syntax.
 
