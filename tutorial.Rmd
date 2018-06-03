@@ -21,7 +21,7 @@ Overview of the tutorial
 4. Publish your website to GitHub
 5. Explore advanced features
 
-## 1. Background info
+## Background info
 
 ## Why use RStudio to make static websites?
 
@@ -29,7 +29,8 @@ Overview of the tutorial
 
 ## What is Hugo?
 
-# 2. Learn the basics
+
+# Learn the basics
 
 ## install blogdown and hugo
 ```
