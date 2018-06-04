@@ -250,14 +250,7 @@ Add the following text to the new `.md` file:
     Let's add a table, just for kicks.
 
     | hours of sun | happiness |
-    | - | - |
-    | 0 | 1 |
-    | 3 | 4 |
-    | 5 | 7 |
-    | 7 | 10 |
-
-    | hours of sun | happiness |
-    |--------------|-----------|
+    |---|---|
     | 0 | 1 |
     | 3 | 4 |
     | 5 | 7 |
@@ -315,7 +308,8 @@ More on the recommended workflow [here](https://bookdown.org/yihui/blogdown/work
 Helpful resources
 =================
 
-<https://alison.rbind.io/slides/blogdown-workshop-slides>
-<https://alison.rbind.io/post/up-and-running-with-blogdown/#build-your-site-in-rstudio>
-<http://amber.rbind.io/blog/2016/12/19/creatingsite/> <https://gohugo.io/>
-<http://elipapa.github.io/markdown-cv/>
+-   <https://alison.rbind.io/slides/blogdown-workshop-slides>
+-   <https://alison.rbind.io/post/up-and-running-with-blogdown/#build-your-site-in-rstudio>
+-   <http://amber.rbind.io/blog/2016/12/19/creatingsite/>
+-   <https://gohugo.io/>
+-   <http://elipapa.github.io/markdown-cv/>
