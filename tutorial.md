@@ -1,35 +1,39 @@
 Websites in RStudio Tutorial
 ================
 Dani Cosme & Sam Chavez
-6/2/2018
+06-03-2018
 
--   [Create a website in RStudio](#create-a-website-in-rstudio)
-    -   [Background info](#background-info)
+-   [Overview of the tutorial](#overview-of-the-tutorial)
+-   [Background](#background)
     -   [Why use RStudio to make static websites?](#why-use-rstudio-to-make-static-websites)
     -   [What is blogdown?](#what-is-blogdown)
     -   [What is Hugo?](#what-is-hugo)
 -   [Learn the basics](#learn-the-basics)
-    -   [install blogdown and hugo](#install-blogdown-and-hugo)
-    -   [update hugo if necessary](#update-hugo-if-necessary)
-    -   [create a website using the default lithium template](#create-a-website-using-the-default-lithium-template)
-    -   [render the site](#render-the-site)
-    -   [where does the content live?](#where-does-the-content-live)
-    -   [config.toml file](#config.toml-file)
-    -   [about page](#about-page)
-    -   [posts](#posts)
-        -   [Create a new post](#create-a-new-post)
-            -   [Markdown post](#markdown-post)
-            -   [Rmarkdown post](#rmarkdown-post)
-    -   [create academic website using the `hugo-academic` template](#create-academic-website-using-the-hugo-academic-template)
--   [render the site](#render-the-site-1)
+    -   [Install blogdown and hugo](#install-blogdown-and-hugo)
+    -   [Update hugo if necessary](#update-hugo-if-necessary)
+    -   [Create a website using the default lithium template](#create-a-website-using-the-default-lithium-template)
+    -   [Render the site](#render-the-site)
+    -   [Where does the content live?](#where-does-the-content-live)
+    -   [`config.toml` file](#config.toml-file)
+    -   [Homepage](#homepage)
+    -   [About page](#about-page)
+    -   [Pages](#pages)
+    -   [Posts](#posts)
+-   [Create academic website using the `hugo-academic` template](#create-academic-website-using-the-hugo-academic-template)
+-   [Advanced features](#advanced-features)
+-   [Publish your website](#publish-your-website)
+-   [Helpful resources](#helpful-resources)
 
-Create a website in RStudio
-===========================
+### Overview of the tutorial
 
-Overview of the tutorial 1. Background into 2. Learn the basics 3. Create an academic website 4. Publish your website to GitHub 5. Explore advanced features
+1.  Background
+2.  Learn the basics
+3.  Create an academic website
+4.  Explore advanced features
+5.  Publish your website to GitHub
 
-Background info
----------------
+Background
+==========
 
 Why use RStudio to make static websites?
 ----------------------------------------
@@ -43,60 +47,123 @@ What is Hugo?
 Learn the basics
 ================
 
-install blogdown and hugo
+Install blogdown and hugo
 -------------------------
 
     install.packages("blogdown")
     library(blogdown)
     blogdown::install_hugo()
 
-update hugo if necessary
+Update hugo if necessary
 ------------------------
 
     blogdown::hugo_version() 
     blogdown::update_hugo()
 
-create a website using the default lithium template
+Create a website using the default lithium template
 ---------------------------------------------------
 
-    blogdown::new_site()
+There are a number of ways to create a new website project. You can create it using the GUI by clikcing `File > New Project > New Directory > Website Using Blogdown` or my simply specifying the path to the new website as a argument in the `blogdown::new_site()` function. Make sure that you specify the new directory (e.g. the name of the folder you would like to create) in the path.
 
-render the site
+``` r
+blogdown::new_site("default-site")
+```
+
+You can also specify a theme when creating your new site. The default is the [lithium theme](https://github.com/yihui/hugo-lithium), but there are a variety of other [Hugo themes](https://themes.gohugo.io/) available. We'll use the [hugo-academic](https://github.com/gcushen/hugo-academic) theme later in the tutorial.
+
+    blogdown::new_site(theme = 'yihui/hugo-lithium')
+    blogdown::new_site(theme = 'devcows/hugo-universal-theme')
+    blogdown::new_site(theme = 'gcushen/hugo-academic')
+
+Render the site
 ---------------
 
-    blogdown::serve_site()
+Anytime you want to render the site, you can do so by either clicking `Addins > Serve Site` or executing the `blogdown::serve_site()` function. This function should be executed from the site directory, so if you are not currently in that directory, make sure to change you current working directory to the site directory.
 
-where does the content live?
+``` r
+setwd("default-site/")
+blogdown::serve_site()
+```
+
+Where does the content live?
 ----------------------------
 
-Key components: + config.toml = configuration file that the user edits to customize their site + index.Rmd = + content/ = where the actual content (e.g. pages, posts live) + public/ =
+Take a look at what's in the site directory.
 
-config.toml file
-----------------
+Key components:
++ `config.toml` = configuration file that the user edits to customize their site
++ `content/` = where the actual content (e.g. pages, posts live)
++ `public/` = the directory containing the website for online deployment
 
-`[[menu.main]]` =
+`config.toml` file
+------------------
+
+The configuration file is where \[X\]. More about configuration files and the variables specified within it [here](http://gohugo.io/getting-started/configuration/)
+
+### Edit `config.toml`
+
+Change the site name
+
+    title = "Dani Cosme, M.S."
+
+Enable emojis
+
+    enableEmoji = true
+
+### Navigation bar
+
+More on menu management [here](https://gohugo.io/variables/menus/). `[[menu.main]]` = Pages and links in the menu bar
 
 -   Can be external links (e.g. Twitter page) or internal links (e.g. /posts/)
 -   Default arrangement is alphabetical order
+-   To manually specify the order, add `weight` as a field
 
-Add the following text to your `config.toml` page:
+Add the following text to your `config.toml` page and see what happens:
 
     [[menu.main]]
-        name = "CV"
-        url = "https://twitter.com/rstudio"
-    [[menu.main]]
-        name = "Zed"
-        url = "https://twitter.com/rstudio"
+        name = "UO Data Science Club"
+        url = "https://github.com/uodatascience"
+        weight = 1
 
-about page
+Homepage
+--------
+
+Create a file called `index.html` in the `layouts/` directory.
+
+``` bash
+touch default-site/layouts/index.html
+```
+
+Copy the following text into `layouts/index.html`. I borrowed this code from [Alison Hill's awesome blogdown tutorial](https://github.com/rladies-pdx/rladies-PDX/blob/master/layouts/index.html), but you could write your own html code to create the layout for your homepage.
+
+    {{ partial "header" . }}
+
+    <div class="intro">
+            <div><center><img class="center-image" src={{ .Site.Params.img }} width="20%"/></center></div>
+
+            <h1><center>{{ markdownify .Title }}</center></h1>
+            
+            <h2><center>{{ markdownify .Site.Params.Description }}</center></h2>
+
+    </div>
+
+
+    {{ partial "footer" . }}
+
+We referenced a field`.Site.Params.img`, but it currently doesn't exist. Let's add it to `config.toml` and also update the site description.
+
+    [params]
+        description = "Welcome to my website!<br>Here is a bunch of text about me.<br>Yada yada yada."
+        img = "https://avatars1.githubusercontent.com/u/11858670?s=460&v=4"
+
+About page
 ----------
 
-1.  Open `content/about/md` and check it out.
-2.  Add the following text to the file and look at the difference.
+Open `content/about.md` and check it out. Add the following text to the `about.md` file and look at the difference.
 
-<!-- -->
+    Because we enabled emojis, we can use here. I :heart: emojis!
 
-    We're writing in markdown here. Some useful syntax.
+    Posts are written in plain markdown. Here is some useful syntax. More on plain markdown in the default post ["A Plain Markdown Post"](../2016/12/30/a-plain-markdown-post/). There's also lots more information in the digital book ["blogdown: Creating Websites with R Markdown"](https://bookdown.org/yihui/blogdown/output-format.html).
 
     ## h2 header
     ### h3 header
@@ -108,16 +175,54 @@ about page
 
     Check out [Cory's awesome markdown tutorial](https://github.com/uodatascience/markdown) for more markdown magic.
 
-    Also not that you can write in html as well.
+    Note: you can write in html.
 
+    <h4> Embed a gif <br>
     <img src="https://media.giphy.com/media/l0Nwvo3slpo6nS0PC/giphy.gif" alt="neato">
 
-posts
+    <h4> Embed a calendar <br>
+    <iframe src="https://calendar.google.com/calendar/embed?src=beo4lsbjns0kqovh8nktjou8l4%40group.calendar.google.com&ctz=America%2FLos_Angeles" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+Pages
 -----
 
-1.  Open `content/post` and look around
+Create a new page called `CV` in the content folder.
 
-Add the following text to your `config.toml` page:
+``` r
+setwd("default-site/")
+blogdown::new_content("content/cv")
+```
+
+Copy the following text into the document:
+
+    ---
+    title: ''
+    date: '2018-06-03 23:25:08 GMT'
+    ---
+
+    <div style="text-align: right"><h1>DANI COSME</div>
+    <div style="text-align: right">dcosme@uoregon.edu</div>
+    <div style="text-align: right"><a href="http://dcosme.github.io">dcosme.github.io</a></div>
+
+    ### EDUCATION //
+    **Doctoral Candidate, Psychology, 2015-present**<br>
+    University of Oregon (Eugene, OR)<br>
+    Advisors: Drs. Jennifer Pfeifer & Elliot Berkman
+
+    ### PUBLICATIONS //
+    **Cosme, D.** (2018) Brilliant article. *Science*, 1(1), 1-5.<br>
+    [DOI](http://doi.org/) [OSF](http://osf.io/) [NEUROVAULT](http://neurovault.org/)
+
+Add the page to the navigation bar by adding the following text to `config.toml`. Note that while the filepath is `site root/content/cv.md`, the webpath is `/baseurl/cv`.
+
+    [[menu.main]]
+        name = "CV"
+        url = "/cv/"
+
+Posts
+-----
+
+Open `content/post` and look around. Add `Posts` to the navigation bar by adding it as a field in `config.toml`:
 
     [[menu.main]]
         name = "Posts"
@@ -125,11 +230,16 @@ Add the following text to your `config.toml` page:
 
 ### Create a new post
 
-The `new_post()` function will automatically create a new post and append the date to the front of the file name that you specify as an input.
+Using the GUI: `Addins > New Post`
+
+In the console, the `new_post()` function will automatically create a new post and append the date to the front of the file name that you specify as an input.
 
 #### Markdown post
 
-    blogdown::new_post("newmd", ext = '.md')
+``` r
+setwd("default-site/")
+blogdown::new_post("newmd", ext = '.md')
+```
 
 Add the following text to the new `.md` file:
 
@@ -140,13 +250,20 @@ Add the following text to the new `.md` file:
     Let's add a table, just for kicks.
 
     | hours of sun | happiness |
+    | - | - |
+    | 0 | 1 |
+    | 3 | 4 |
+    | 5 | 7 |
+    | 7 | 10 |
+
+    | hours of sun | happiness |
     |--------------|-----------|
     | 0 | 1 |
     | 3 | 4 |
     | 5 | 7 |
     | 7 | 10 |
 
-Add the following r code chunks and view in the browser:
+Add the following r code chunks (removing `eval=FALSE`) and view the file in the browser:
 
 ``` r
 mean(iris$Sepal.Length)
@@ -162,18 +279,43 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
 
 #### Rmarkdown post
 
-    blogdown::new_post("newrmd", ext = '.Rmd')
+``` r
+setwd("default-site/")
+blogdown::new_post("newrmd", ext = '.Rmd')
+```
 
 Add the same text as above to your `.Rmd` file and view it in the browser.
 
-create academic website using the `hugo-academic` template
-----------------------------------------------------------
+### Tags and categories
 
-    gcushen/hugo-academic
+Create academic website using the `hugo-academic` template
+==========================================================
 
-render the site
-===============
+``` r
+blogdown::new_site("academic-site", theme = "gcushen/hugo-academic")
+```
 
-Addins &gt; Serve Site
+Render the site
 
-    blogdown::serve_site()
+``` r
+setwd("academic-site/")
+blogdown::serve_site()
+```
+
+Advanced features
+=================
+
+Publish your website
+====================
+
+To create your website for publishing, execute `blogdown::hugo_build()`. This will create/update the `public/` directory in your site's root directory.
+
+More on the recommended workflow [here](https://bookdown.org/yihui/blogdown/workflow.html).
+
+Helpful resources
+=================
+
+<https://alison.rbind.io/slides/blogdown-workshop-slides>
+<https://alison.rbind.io/post/up-and-running-with-blogdown/#build-your-site-in-rstudio>
+<http://amber.rbind.io/blog/2016/12/19/creatingsite/> <https://gohugo.io/>
+<http://elipapa.github.io/markdown-cv/>
