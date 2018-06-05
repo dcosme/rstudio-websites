@@ -1,4 +1,4 @@
-Websites in RStudio Tutorial
+Websites in RStudio
 ================
 Dani Cosme & Sam Chavez
 06-03-2018
@@ -27,8 +27,8 @@ Dani Cosme & Sam Chavez
 -   [Create academic website using the `hugo-academic` template](#create-academic-website-using-the-hugo-academic-template)
 -   [Publish your website](#publish-your-website)
 -   [Workflow](#workflow)
--   [Helpful resources](#helpful-resources)
 -   [Mini (mega? ulimate?) hack](#mini-mega-ulimate-hack)
+-   [Helpful resources](#helpful-resources)
 
 ### Overview of the tutorial
 
@@ -110,8 +110,8 @@ Take a look at what's in the site directory.
 
 Key components:
 + `config.toml` = configuration file that the user edits to customize their site
-+ `content/` = where the actual content (e.g. pages, posts live)
-+ `public/` = the directory containing the website for online deployment
++ `/content/` = where the actual content (e.g. pages, posts live)
++ `/public/` = the directory containing the website for online deployment + `/layouts/` = where you'll place code to override the original template design
 
 `config.toml` file
 ------------------
@@ -365,17 +365,6 @@ Here is the [suggested workflow](https://slides.yihui.name/2017-rmarkdown-UNL-Yi
 > 3.  Write and save (take a look at the automatic preview)
 > 4.  Push everything to Github, or upload the public/ directory to Netlify directly
 
-Helpful resources
-=================
-
--   <https://bookdown.org/yihui/blogdown/>
--   <https://apreshill.github.io/data-vis-labs-2018/slides/06-slides_blogdown.html#1>
--   <https://alison.rbind.io/slides/blogdown-workshop-slides>
--   <https://alison.rbind.io/post/up-and-running-with-blogdown/#build-your-site-in-rstudio>
--   <http://amber.rbind.io/blog/2016/12/19/creatingsite/>
--   <https://gohugo.io/>
--   <http://elipapa.github.io/markdown-cv/>
-
 Mini (mega? ulimate?) hack
 ==========================
 
@@ -392,3 +381,14 @@ Change colors, futz with custom CSS, make a shiny app and link to it -- feel fre
 Go 🍌 🍌!
 
 Or just do the bare minimum because it's the last week of the term 😄
+
+Helpful resources
+=================
+
+-   <https://bookdown.org/yihui/blogdown/>
+-   <https://apreshill.github.io/data-vis-labs-2018/slides/06-slides_blogdown.html#1>
+-   <https://alison.rbind.io/slides/blogdown-workshop-slides>
+-   <https://alison.rbind.io/post/up-and-running-with-blogdown/#build-your-site-in-rstudio>
+-   <http://amber.rbind.io/blog/2016/12/19/creatingsite/>
+-   <https://gohugo.io/>
+-   <http://elipapa.github.io/markdown-cv/>
