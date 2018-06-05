@@ -251,6 +251,8 @@ Add the same text as above to your `.Rmd` file and view it in the browser.
 
 ### Tags and categories
 
+# Advanced features
+
 # Create academic website using the `hugo-academic` template
 ```{r, eval=FALSE}
 blogdown::new_site("academic-site", theme = "gcushen/hugo-academic")
@@ -261,8 +263,6 @@ Render the site
 setwd("academic-site/")
 blogdown::serve_site()
 ```
-
-# Advanced features
 
 
 # Publish your website
