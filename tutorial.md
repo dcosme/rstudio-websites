@@ -23,8 +23,7 @@ Dani Cosme & Sam Chavez
     -   [Password protection](#password-protection)
     -   [Shiny apps](#shiny-apps)
     -   [Commenting](#commenting)
-    -   [Custom CSS (?)](#custom-css)
--   [Create academic website using the `hugo-academic` template](#create-academic-website-using-the-hugo-academic-template)
+-   [Explore `hugo-academic` template](#explore-hugo-academic-template)
 -   [Publish your website](#publish-your-website)
 -   [Workflow](#workflow)
 -   [Mini (mega? ulimate?) hack](#mini-mega-ulimate-hack)
@@ -59,8 +58,12 @@ Why use RStudio to make static websites?
 What is blogdown?
 -----------------
 
+blogdown is a package that leverages R Markdown and Hugo to create static websites.
+
 What is Hugo?
 -------------
+
+Hugo is a static website generator. Static websites are collections of HTML files and external dependencies references within them. More on Hugo [here](https://bookdown.org/yihui/blogdown/hugo.html).
 
 Learn the basics
 ================
@@ -111,12 +114,12 @@ Take a look at what's in the site directory.
 Key components:
 + `config.toml` = configuration file that the user edits to customize their site
 + `/content/` = where the actual content (e.g. pages, posts live)
-+ `/public/` = the directory containing the website for online deployment + `/layouts/` = where you'll place code to override the original template design
++ `/public/` = the directory containing the website for online deployment + `/layouts/` = where you'll place code to override the original template design + `/static/` = where content such as images and CSS code are stored + `/theme/` = where the theme template is stored
 
 `config.toml` file
 ------------------
 
-The configuration file is where \[X\]. More about configuration files and the variables specified within it [here](http://gohugo.io/getting-started/configuration/)
+The configuration file is where global variables and settings are defined. More about configuration files and the variables specified within it [here](http://gohugo.io/getting-started/configuration/). More information on TOML syntax [here](https://bookdown.org/yihui/blogdown/configuration.html#toml-syntax).
 
 ### Edit `config.toml`
 
@@ -307,7 +310,13 @@ Add the same text as above to your `.Rmd` file and view it in the browser. We ca
 
 This feature makes R Mardown posts ideal for sharing code via your website.
 
-### Tags and categories
+#### Adding HTML files directly
+
+Rather than creating a markdown post, you may simply want to an HTML file that you've already created (e.g. your data science tutorial). To do this, you would simply copy the file into `/content/` or an alternative location. Here, we'll create a folder called "data-visualization" and copy a HTML file into it.
+
+``` bash
+mkdir default-site/content/data-visualization
+```
 
 Advanced features
 =================
@@ -321,15 +330,12 @@ Shiny apps
 Commenting
 ----------
 
-Custom CSS (?)
---------------
-
-Create academic website using the `hugo-academic` template
-==========================================================
+Explore `hugo-academic` template
+================================
 
 Now that we've gotten our bearings with the default template, let's such out a popular template for making personal academic website created by [George Cushen](https://github.com/gcushen/hugo-academic).
 
-Here are a few examples of how people (including Dani) have modified this template: + [Alison Hill](https://alison.rbind.io/) + [Flip Tandeo](http://physics.ucr.edu/~flip/) + [Amlan Kar](https://amlankar.github.io/) + [Yu Cheng](https://fischcheng.github.io/) + [Dani Cosme](https://dcosme.github.io/)
+Here are a few examples of how people have modified this template: + [Alison Hill](https://alison.rbind.io/) + [Flip Tandeo](http://physics.ucr.edu/~flip/) + [Amlan Kar](https://amlankar.github.io/) + [Yu Cheng](https://fischcheng.github.io/)
 
 We'll call our new website `academic-site` and it will be saved to the `rstudio-websites` directory.
 
@@ -344,41 +350,95 @@ setwd("academic-site/")
 blogdown::serve_site()
 ```
 
-Click around the rendered website. What features do you like? What features seem useful? + Tags and categories
+Click around the rendered website. What features seem useful? What features would you want in a personal website?
 
-Now, let's check out the file structure. + config file + content + publications
+Now, let's check out the file structure and take a look at what's in the following files/directories: + `config.toml` + content
 
 Publish your website
 ====================
 
 To create your website for publishing, execute `blogdown::hugo_build()`. This will create/update the `public/` directory in your site's root directory.
 
-More on the recommended workflow [here](https://bookdown.org/yihui/blogdown/workflow.html).
+Before we build and deploy our site, we need to do a couple of things:
+
+Create a repo for your website on GitHub. Make sure that you **do not** initialize it with a `README` (you could, but then the following directions will not work properly).
+
+If you're site will hosted in a subdirectory (e.g. username.github.io/repo-name), you'll need to set `relativeurls = true` in `config.toml`. More info on this [here](https://github.com/rstudio/blogdown/issues/84).
+
+    relativeurls = true
+
+Build the site. Executing this command will update the `/public/` folder with all of your new content.
+
+``` r
+setwd("default-site/")
+blogdown::hugo_build()
+```
+
+In the command line, navigate to the public folder in your site
+
+``` bash
+cd ~/Documents/Courses/PSY607_DataScience/default-site/public
+```
+
+Inialize git
+
+It's important that the public folder is not currenly living in a git repository. To check whether git is initialized type `git status`.
+
+``` bash
+git init
+```
+
+Add remote repository
+
+``` bash
+git remote add origin https://github.com/dcosme/test-site.git
+```
+
+Add and commit all the files
+
+``` bash
+git add .
+git commit -m "initial commit"
+```
+
+Push local changes to remote repository
+
+``` bash
+git push origin master
+```
+
+In Github, enable GitHub Pages `Your repo > Settings > GitHub Page > Source = master branch > Save`
+
+If this has worked, there should now be a link highlighted in blue with the link to your website (e.g. <https://dcosme.github.io/test-site>).
+
+Go to your website and bask in the glory 🎉
 
 Workflow
 ========
 
-Here is the [suggested workflow](https://slides.yihui.name/2017-rmarkdown-UNL-Yihui-Xie.html#30) from the main developer of blogdown, Yihui:
+Here is the [suggested workflow](https://slides.yihui.name/2017-rmarkdown-UNL-Yihui-Xie.html#30) from the main developer of blogdown, Yihui Xie:
 
 > 1.  Open your website project, click the "Serve Site" addin
 > 2.  Revise old pages/posts, or click the "New Post" addin
 > 3.  Write and save (take a look at the automatic preview)
 > 4.  Push everything to Github, or upload the public/ directory to Netlify directly
 
+More on the recommended workflow [here](https://bookdown.org/yihui/blogdown/workflow.html).
+
 Mini (mega? ulimate?) hack
 ==========================
 
 You final hack in this class if to create a personal website and post it to GitHub. You can use any template you want or make it from scratch using the [*rmarkdown* package](http://nickstrayer.me/RMarkdown_Sites_tutorial/).
 
-Here are the component you should include:
+Here are the components you should include:
 
 1.  Homepage with a brief description about your research interests
-2.  A CV (either written in markdown or simply as a PDF you've uploaded)
-3.  Your tutorial from this class as a post
+2.  A CV (either written in markdown or simply uploaded as a PDF)
+3.  Your tutorial from this class
 
 Change colors, futz with custom CSS, make a shiny app and link to it -- feel free to add anything else you'd like!
 
-Go 🍌 🍌!
+Go 🍌 🍌
 
 Or just do the bare minimum because it's the last week of the term 😄
 
