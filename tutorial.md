@@ -114,7 +114,10 @@ Take a look at what's in the site directory.
 Key components:
 + `config.toml` = configuration file that the user edits to customize their site
 + `/content/` = where the actual content (e.g. pages, posts live)
-+ `/public/` = the directory containing the website for online deployment + `/layouts/` = where you'll place code to override the original template design + `/static/` = where content such as images and CSS code are stored + `/theme/` = where the theme template is stored
++ `/public/` = the directory containing the website for online deployment
++ `/layouts/` = where you'll place code to override the original template design
++ `/static/` = where content such as images and CSS code are stored
++ `/theme/` = where the theme template is stored
 
 `config.toml` file
 ------------------
