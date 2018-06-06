@@ -335,7 +335,11 @@ Explore `hugo-academic` template
 
 Now that we've gotten our bearings with the default template, let's such out a popular template for making personal academic website created by [George Cushen](https://github.com/gcushen/hugo-academic).
 
-Here are a few examples of how people have modified this template: + [Alison Hill](https://alison.rbind.io/) + [Flip Tandeo](http://physics.ucr.edu/~flip/) + [Amlan Kar](https://amlankar.github.io/) + [Yu Cheng](https://fischcheng.github.io/)
+Here are a few examples of how people have modified this template:
++ [Alison Hill](https://alison.rbind.io/)
++ [Flip Tandeo](http://physics.ucr.edu/~flip/)
++ [Amlan Kar](https://amlankar.github.io/)
++ [Yu Cheng](https://fischcheng.github.io/)
 
 We'll call our new website `academic-site` and it will be saved to the `rstudio-websites` directory.
 
