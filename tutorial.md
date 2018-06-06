@@ -23,7 +23,7 @@ Dani Cosme & Sam Chavez
     -   [Password protection](#password-protection)
     -   [Shiny apps](#shiny-apps)
     -   [Commenting](#commenting)
--   [Explore `hugo-academic` template](#explore-hugo-academic-template)
+-   [Explore the `hugo-academic` template](#explore-the-hugo-academic-template)
 -   [Publish your website](#publish-your-website)
 -   [Workflow](#workflow)
 -   [Mini (mega? ulimate?) hack](#mini-mega-ulimate-hack)
@@ -33,16 +33,16 @@ Dani Cosme & Sam Chavez
 
 1.  Background
 2.  Learn the basics
-3.  Create an academic website
-4.  Explore advanced features
+3.  Explore advanced features
+4.  Check out the `hugo-academic` theme
 5.  Publish your website to GitHub
 
 Background
 ==========
 
-Most of the information in this tutorial is coming from a few amazing resources on using the *blogdown* package to create static websites in RStudio using R Markdown:
+Most of the information in this tutorial is taken from a few amazing resources on using the **blogdown** package to create static websites in RStudio using R Markdown:
 
--   [blogdown: Creating Websites with R Markdown](https://bookdown.org/yihui/blogdown/)
+-   [*blogdown: Creating Websites with R Markdown*](https://bookdown.org/yihui/blogdown/)
 -   Various presentations and posts by Alison Hill
     -   <https://apreshill.github.io/data-vis-labs-2018/slides/06-slides_blogdown.html#1>
     -   <https://alison.rbind.io/slides/blogdown-workshop-slides>
@@ -58,12 +58,12 @@ Why use RStudio to make static websites?
 What is blogdown?
 -----------------
 
-blogdown is a package that leverages R Markdown and Hugo to create static websites.
+**blogdown** is a package that leverages R Markdown and Hugo to create static websites.
 
 What is Hugo?
 -------------
 
-Hugo is a static website generator. Static websites are collections of HTML files and external dependencies references within them. More on Hugo [here](https://bookdown.org/yihui/blogdown/hugo.html).
+Hugo is a static website generator. Static websites are collections of HTML files and the external dependencies referenced within them. More on Hugo [here](https://bookdown.org/yihui/blogdown/hugo.html).
 
 Learn the basics
 ================
@@ -71,23 +71,29 @@ Learn the basics
 Install blogdown and hugo
 -------------------------
 
-    install.packages("blogdown")
-    library(blogdown)
-    blogdown::install_hugo()
+``` r
+install.packages("blogdown")
+library(blogdown)
+blogdown::install_hugo()
+```
 
 Update hugo if necessary
 ------------------------
 
-    blogdown::hugo_version() 
-    blogdown::update_hugo()
+``` r
+blogdown::hugo_version() 
+blogdown::update_hugo()
+```
 
 Create a website using the default lithium template
 ---------------------------------------------------
 
-There are a number of ways to create a new website project. You can create it using the IDE by clikcing `File > New Project > New Directory > Website Using Blogdown` or my simply specifying the path to the new website as a argument in the `blogdown::new_site()` function. Make sure that you specify the new directory (e.g. the name of the folder you would like to create) in the path.
+There are a number of ways to create a new website project. You can create it using the IDE by clicking `File > New Project > New Directory > Website Using Blogdown` or by simply specifying the path to the new website as a argument in the `blogdown::new_site()` function. Make sure that you specify the new directory (e.g. the name of the folder you would like to create) in the path.
+
+Here we'll create the website one level above our current working directory. The reason for doing this is that our current working directory is a git repository and if we try to publish this later, it will cause problems (it's not straight forward to have a repo inside of a repo).
 
 ``` r
-blogdown::new_site("default-site")
+blogdown::new_site("../default-site")
 ```
 
 You can also specify a theme when creating your new site. The default is the [lithium theme](https://github.com/yihui/hugo-lithium), but there are a variety of other [Hugo themes](https://themes.gohugo.io/) available. We'll use the [hugo-academic](https://github.com/gcushen/hugo-academic) theme later in the tutorial.
@@ -102,7 +108,7 @@ Render the site
 Anytime you want to render the site, you can do so by either clicking `Addins > Serve Site` or executing the `blogdown::serve_site()` function. This function should be executed from the site directory, so if you are not currently in that directory, make sure to change you current working directory to the site directory.
 
 ``` r
-setwd("default-site/")
+setwd("../default-site/")
 blogdown::serve_site()
 ```
 
@@ -155,7 +161,7 @@ Homepage
 Create a file called `index.html` in the `layouts/` directory.
 
 ``` bash
-touch default-site/layouts/index.html
+touch ../default-site/layouts/index.html
 ```
 
 Copy the following text into `layouts/index.html`. I borrowed this code from [Alison Hill's awesome blogdown tutorial](https://github.com/rladies-pdx/rladies-PDX/blob/master/layouts/index.html), but you could write your own html code to create the layout for your homepage.
@@ -193,7 +199,7 @@ Open `/content/about.md` and check it out. Add the following text to the `about.
 
     Because we enabled emojis in `config.toml`, we can use them here. I :heart: emojis!
 
-    Posts are written in plain markdown. Here is some useful syntax. More on plain markdown in the default post [A Plain Markdown Post](../2016/12/30/a-plain-markdown-post/). There's also lots more information in the digital book [blogdown: Creating Websites with R Markdown](https://bookdown.org/yihui/blogdown/output-format.html).
+    Posts are written in plain markdown. Here is some useful syntax. More on plain markdown in the default post [A Plain Markdown Post](../2016/12/30/a-plain-markdown-post/). There's also lots more information in the digital book [*blogdown: Creating Websites with R Markdown*](https://bookdown.org/yihui/blogdown/output-format.html).
 
     ## h2 header
     ### h3 header
@@ -219,7 +225,7 @@ Pages
 Create a new page called `CV` in the content folder.
 
 ``` r
-setwd("default-site/")
+setwd("../default-site/")
 blogdown::new_content("content/cv")
 ```
 
@@ -249,7 +255,7 @@ Add the page to the navigation bar by adding the following text to `config.toml`
         name = "CV"
         url = "/cv/"
 
-This is the start of a super basic mardown CV, but there are a number of more advanced templates out there, such as [this one](https://github.com/elipapa/markdown-cv).
+This is the start of a super basic markdown CV, but there are a number of more advanced templates out there, such as [this one](https://github.com/elipapa/markdown-cv).
 
 Posts
 -----
@@ -267,7 +273,7 @@ In the console, the `new_post()` function will automatically create a new post a
 Let's create a plain markdown post and add some content.
 
 ``` r
-setwd("default-site/")
+setwd("../default-site/")
 blogdown::new_post("newmd", ext = '.md')
 ```
 
@@ -305,7 +311,7 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
 Now let's create a plain markdown post and see how it differs from the plain markdown file.
 
 ``` r
-setwd("default-site/")
+setwd("../default-site/")
 blogdown::new_post("newrmd", ext = '.Rmd')
 ```
 
@@ -315,11 +321,30 @@ This feature makes R Mardown posts ideal for sharing code via your website.
 
 #### Adding HTML files directly
 
-Rather than creating a markdown post, you may simply want to an HTML file that you've already created (e.g. your data science tutorial). To do this, you would simply copy the file into `/content/` or an alternative location. Here, we'll create a folder called "data-visualization" and copy a HTML file into it.
+Rather than creating a markdown post, you may simply want to an HTML file that you've already created (e.g. your data science tutorial). To do this, you would simply copy the file into `/content/` or an alternative location.
+
+To compare the output of adding an HTML file versus adding an Rmd file, we'll create a folder called "data-visualization" and copy two test files into it.
 
 ``` bash
-mkdir default-site/content/data-visualization
+# make the directory
+mkdir ../default-site/content/data-visualization
+
+# copy the HTML and .Rmd files to the directory
+cp datavis.html ../default-site/content/data-visualization
+cp datavis_rmd.Rmd ../default-site/content/data-visualization
 ```
+
+Serve the site
+
+``` r
+setwd("../default-site/")
+blogdown::serve_site()
+```
+
+Compare the files by opening the site in the browser and navigating to:
+
+    /data-visualization/datavis
+    /data-visualization/datavis_rmd
 
 Advanced features
 =================
@@ -333,10 +358,10 @@ Shiny apps
 Commenting
 ----------
 
-Explore `hugo-academic` template
-================================
+Explore the `hugo-academic` template
+====================================
 
-Now that we've gotten our bearings with the default template, let's such out a popular template for making personal academic website created by [George Cushen](https://github.com/gcushen/hugo-academic).
+Now that we've gotten our bearings with the default template, let's check out a popular template for making personal academic website created by [George Cushen](https://github.com/gcushen/hugo-academic).
 
 Here are a few examples of how people have modified this template:
 + [Alison Hill](https://alison.rbind.io/)
@@ -347,13 +372,13 @@ Here are a few examples of how people have modified this template:
 We'll call our new website `academic-site` and it will be saved to the `rstudio-websites` directory.
 
 ``` r
-blogdown::new_site("academic-site", theme = "gcushen/hugo-academic")
+blogdown::new_site("../academic-site", theme = "gcushen/hugo-academic")
 ```
 
 Render the site, if necessary.
 
 ``` r
-setwd("academic-site/")
+setwd("../academic-site/")
 blogdown::serve_site()
 ```
 
@@ -370,16 +395,18 @@ Before we build and deploy our site, we need to do a couple of things:
 
 Create a repo for your website on GitHub. Make sure that you **do not** initialize it with a `README` (you could, but then the following directions will not work properly).
 
-If you're site will hosted in a subdirectory (e.g. username.github.io/repo-name), you'll need to set `relativeurls = true` in `config.toml`. More info on this [here](https://github.com/rstudio/blogdown/issues/84).
+If you're site will be hosted in a subdirectory (e.g. username.github.io/repo-name), you'll need to set `relativeurls = true` in `config.toml`. More info on this [here](https://github.com/rstudio/blogdown/issues/84).
 
     relativeurls = true
 
 Build the site. Executing this command will update the `/public/` folder with all of your new content.
 
 ``` r
-setwd("default-site/")
+setwd("../default-site/")
 blogdown::hugo_build()
 ```
+
+There are several ways to publish your website. Today, we're going to go over how to deploy your sit using git from the command line. There are other options though, e.g. the authors of *blogdown: Creating Websites with R Markdown* recommend using Netlify to serve your site. Lots more on publishing your site [in the book](https://bookdown.org/yihui/blogdown/deployment.html).
 
 In the command line, navigate to the public folder in your site
 
@@ -416,14 +443,14 @@ git push origin master
 
 In Github, enable GitHub Pages `Your repo > Settings > GitHub Page > Source = master branch > Save`
 
-If this has worked, there should now be a link highlighted in blue with the link to your website (e.g. <https://dcosme.github.io/test-site>).
+If this has worked, there should now be a link highlighted in blue with the address to your website. <img src="git_site.png" alt="">
 
 Go to your website and bask in the glory 🎉
 
 Workflow
 ========
 
-Here is the [suggested workflow](https://slides.yihui.name/2017-rmarkdown-UNL-Yihui-Xie.html#30) from the main developer of blogdown, Yihui Xie:
+Here is the [suggested workflow](https://slides.yihui.name/2017-rmarkdown-UNL-Yihui-Xie.html#30) from the main developer of **blogdown**, Yihui Xie:
 
 > 1.  Open your website project, click the "Serve Site" addin
 > 2.  Revise old pages/posts, or click the "New Post" addin
@@ -435,7 +462,7 @@ More on the recommended workflow [here](https://bookdown.org/yihui/blogdown/work
 Mini (mega? ulimate?) hack
 ==========================
 
-You final hack in this class if to create a personal website and post it to GitHub. You can use any template you want or make it from scratch using the [*rmarkdown* package](http://nickstrayer.me/RMarkdown_Sites_tutorial/).
+You final hack in this class if to create a personal website and post it to GitHub. You can use any template you want or make it from scratch using the **rmarkdown** package [(tutorial here)](http://nickstrayer.me/RMarkdown_Sites_tutorial/).
 
 Here are the components you should include:
 

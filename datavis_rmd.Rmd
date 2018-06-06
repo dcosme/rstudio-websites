@@ -1,0 +1,33 @@
+---
+title: "data visualization test"
+author: "Dani Cosme"
+date: "6/6/2018"
+output:
+  html_document:
+    code_folding: hide
+    highlight: tango
+    theme: united
+    toc: true
+    toc_float: 
+      collapsed: TRUE
+      smooth_scroll: TRUE
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# calculate mean
+```{r}
+mean(iris$Sepal.Length)
+```
+
+# plot length by width
+```{r, message=FALSE}
+require(ggplot2)
+ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
+  geom_point() +
+  geom_smooth(method = "lm") + 
+  scale_color_manual(values = c("#3B9AB2", "#E4B80E", "#F21A00"))
+```
